@@ -30,15 +30,16 @@ CREATE INDEX idx_booking_id ON payment(booking_id);
 
 -- Refactored final query
 SELECT 
-    b.booking_id,
-    b.start_date,
-    b.end_date,
-    u.first_name,
-    u.last_name,
-    p.name AS property_name,
-    p.location,
-    pay.amount
+  b.booking_id,
+  u.first_name,
+  u.email,
+  p.name AS property_name,
+  pay.amount,
+  pay.payment_method
 FROM booking b
 JOIN users u ON b.user_id = u.user_id
 JOIN property p ON b.property_id = p.property_id
-JOIN payment pay ON b.booking_id = pay.booking_id;
+JOIN payment pay ON b.booking_id = pay.booking_id
+WHERE b.start_date >= CURDATE() -- Only show future or current bookings
+  AND pay.payment_method = 'credit_card'; -- Filter by payment method
+
