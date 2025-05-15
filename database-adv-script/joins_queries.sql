@@ -1,0 +1,1 @@
+/*INNER JOIN between booking and user tables*/
