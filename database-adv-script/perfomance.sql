@@ -40,6 +40,6 @@ FROM booking b
 JOIN users u ON b.user_id = u.user_id
 JOIN property p ON b.property_id = p.property_id
 JOIN payment pay ON b.booking_id = pay.booking_id
-WHERE b.start_date >= CURDATE() -- Only show future or current bookings
-  AND pay.payment_method = 'credit_card'; -- Filter by payment method
+WHERE b.start_date >= CURDATE() 
+  AND pay.payment_method = 'credit_card';
 
